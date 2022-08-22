@@ -1,13 +1,17 @@
 function login(){ 
 
+
+    //Variables para traer los datos de login.html
+
     let usuario = document.getElementById('username').value;
 
     let contrasenia = document.getElementById('password').value;
     
-    
+   
 
     if (usuario === "" && contrasenia === ""){
 
+        
         document.getElementById('username').classList.add('error')
         document.getElementById('password').classList.add('error')
 
@@ -28,11 +32,11 @@ function login(){
     }else{
         sessionStorage.setItem('user',usuario);
         location.href='index.html';
-
+        
     }
     }
 
-
+    //cuando se cargue el contenido, con un click en el boton iniciar sesion de la etiqueta "inicio" da la orden para que se ejecute la funcion login()
 
 document.addEventListener('DOMContentLoaded', () =>{
     
