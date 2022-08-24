@@ -39,7 +39,8 @@ document.addEventListener("DOMContentLoaded", function(){
         {
             categoriesArray = resultObj.data.products;
             showCategoriesList(categoriesArray); // carga los datos a la variable
-            
         }
     });
 });
+
+//localStorage.getItem('catID');
