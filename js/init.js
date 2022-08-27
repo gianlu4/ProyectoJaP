@@ -7,7 +7,8 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 const EXT_TYPE = ".json";
-let Product_URL_modified = "PRODUCTS_URL + catID + EXT_TYPE";
+let Product_URL_modified = PRODUCTS_URL + localStorage.getItem("catID") + EXT_TYPE;
+
 
 
 let showSpinner = function(){
@@ -18,10 +19,10 @@ let hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
-let getJSONData = function(url){
+let getJSONData = function(Product_URL_modified){
     let result = {};
     showSpinner();
-    return fetch(url)
+    return fetch(Product_URL_modified)
     .then(response => {
       if (response.ok) {
         return response.json();

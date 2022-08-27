@@ -2,12 +2,16 @@
 
 let categoriesArray = [];
 
-
 function showCategoriesList(array){
     let htmlContentToAppend = "";
     
-    for(let i = 0; i < array.length; i++){ 
-        let products = array[i];
+    let Prueba1 = array.products;
+    let prueba2 = array.catName;
+    
+    document.getElementById('selector').innerHTML = prueba2;
+    
+    for(let i = 0; i < Prueba1.length; i++){ 
+        let products = Prueba1[i];
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
             <div class="row">
@@ -31,16 +35,16 @@ function showCategoriesList(array){
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend; 
     }
 }
-
+    
 
 document.addEventListener("DOMContentLoaded", function(){
     getJSONData(Product_URL_modified).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            categoriesArray = resultObj.data.products;
+            categoriesArray = resultObj.data;
             showCategoriesList(categoriesArray); // carga los datos a la variable
+           
         }
     });
 });
 
-//localStorage.getItem('catID');
