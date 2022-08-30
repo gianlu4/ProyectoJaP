@@ -222,3 +222,13 @@ body {
   padding-left: 44%;
 }
 
+
+/* botones de cerrar y iniciar sesion*/
+#inicios {
+  background-color:cyan;
+  color: black;
+}
+#cierro {
+  background-color:darkred;
+  height: 5%;
+}

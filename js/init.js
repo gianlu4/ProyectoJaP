@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
       sessionStorage.clear();
       location.href= "index.html";
       }
-    })}
+    })}    
 
 
   function mostrar(){             //mostrar boton de inicio de sesion y ocultar boton de cerrar sesion
