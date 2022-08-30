@@ -4,6 +4,9 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="google-signin-scope" content="profile email"> <!--google oauth-->
+  <meta name="google-signin-client_id" content="505196263094-tf9klce66di6lv9hsicrt8defbo6d2go.apps.googleusercontent.com"><!--google oauth-->
+  
   <title>eMercado - Todo lo que busques está aquí</title>
   
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
@@ -15,6 +18,7 @@
     }
   </style>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://apis.google.com/js/platform.js" async defer></script> <!--google oauth-->
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -30,7 +34,6 @@
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Inicio</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
           </li>
@@ -68,13 +71,16 @@
                         </div>
                         <div id="register-link" class="text-right">
                             <p> ¿No tienes una cuenta?<a href="#" class="text-info"> Regístrate</a>
-                      </div>
-                    
+                      </div> <br><br>
+                      <div id = "accessGoogle" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div><br><!--google oauth--> 
+                      <a href="#" id = "signOutGoogle"onclick="signOut();">Sign out</a><!--google oauth--> 
+                     </div> 
+                   </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div> 
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">

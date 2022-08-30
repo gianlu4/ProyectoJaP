@@ -43,3 +43,55 @@ let getJSONData = function(Product_URL_modified){
         return result;
     });
 } 
+
+document.addEventListener("DOMContentLoaded", ()=>{
+
+  function askCloseSession (){     // pregunta si quiere cerrar sesion
+    Swal.fire({
+      title: '¿Quieres cerrar la sesión de eMercado?',
+      text: "Puedes volver a iniciar sesión en cualquier momento.",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#17a2b8',
+      cancelButtonColor: 'grey',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Cerrar sesión'
+    }).then((result) => {
+      if (result.isConfirmed) {   //si hay respuesta positiva, borra el session y redirije al index
+      sessionStorage.clear();
+      location.href= "index.html";
+      }
+    })}
+
+
+  function mostrar(){             //mostrar boton de inicio de sesion y ocultar boton de cerrar sesion
+      document.getElementById('cierro').style.display = "none";
+  }
+  function ocultar(){             //ocultar boton de inicio de sesion y mostrar boton de cerrar sesion
+      document.getElementById('inicios').style.display = "none";  
+  }
+  
+  let usuario = sessionStorage.getItem('user');
+  
+  if(usuario === null){
+  
+      mostrar();
+      
+  }else{
+  
+      ocultar();
+      document.getElementById('usuario1').innerHTML = "Bienvenido, " + usuario + "!";
+      
+  }
+  
+  document.getElementById('cierro').addEventListener('click', ()=>{
+    
+    askCloseSession ();
+  })
+  
+  document.getElementById('inicios').addEventListener('click',()=>{
+      
+    location.href="login.html";     
+  })
+  })
+

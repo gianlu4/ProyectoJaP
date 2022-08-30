@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", ()=>{
+/*document.addEventListener("DOMContentLoaded", ()=>{
 
 
 function mostrar(){
@@ -7,7 +7,6 @@ function mostrar(){
 function ocultar(){
     document.getElementById('inicios').style.display = "none";  
 }
-
 
 let usuario = sessionStorage.getItem('user');
 
@@ -21,8 +20,9 @@ if(usuario === null){
     
 }else{
 
-    document.getElementById('usuario1').innerHTML = "Bienvenido, " + usuario + "!";
     ocultar();
+    document.getElementById('usuario1').innerHTML = "Bienvenido, " + usuario + "!";
+    
 }
 
 document.getElementById('cierro').addEventListener('click', ()=>{
@@ -41,4 +41,4 @@ document.getElementById('inicios').addEventListener('click',()=>{
 
 
 
-})
+})*/
