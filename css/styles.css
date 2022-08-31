@@ -68,8 +68,9 @@ nav a {
 }
 
 footer {
-  padding-top: 23%;
+  padding-top: -100%;
   padding-bottom: 0%;
+  background-color: #adadad;
 }
 
 footer p {
@@ -231,4 +232,8 @@ body {
 #cierro {
   background-color:darkred;
   height: 85%;
+}
+#accessGoogle{
+  margin-top: -30%; 
+  margin-left: -8%;
 }
