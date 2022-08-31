@@ -1,17 +1,19 @@
-
+const ORDER_ASC_BY_NAME = "AZ";
+const ORDER_DESC_BY_NAME = "ZA";
+const ORDER_BY_PROD_COUNT = "Cant.";
+let currentSortCriteria = undefined;
+let minCount = undefined;
+let maxCount = undefined;
 
 let categoriesArray = [];
+let currentCategoriesArray = [];
+let arrayCatName = [];
 
 function showCategoriesList(array){
     let htmlContentToAppend = "";
-    
-    let Prueba1 = array.products;
-    let prueba2 = array.catName;
-    
-    document.getElementById('selector').innerHTML = prueba2;
-    
-    for(let i = 0; i < Prueba1.length; i++){ 
-        let products = Prueba1[i];
+   
+    for(let i = 0; i < currentCategoriesArray.length; i++){ 
+        let products = currentCategoriesArray[i];
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
             <div class="row">
@@ -35,16 +37,80 @@ function showCategoriesList(array){
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend; 
     }
 }
+
+
+function sortCategories(criteria, array){
+    let result = [];
+    if (criteria === ORDER_ASC_BY_NAME) //= "AZ";
+    {
+        result = array.sort(function(a, b) {
+            if ( a.name < b.name ){ return -1; }
+            if ( a.name > b.name ){ return 1; }
+            return 0;
+        });
+    }else if (criteria === ORDER_DESC_BY_NAME){ //= "ZA";
+        result = array.sort(function(a, b) {
+            if ( a.name > b.name ){ return -1; }
+            if ( a.name < b.name ){ return 1; }
+            return 0;
+        });
+    }else if (criteria === ORDER_BY_PROD_COUNT){ //= "Cant.";
+        result = array.sort(function(a, b) {
+            let aCount = parseInt(a.productCount);
+            let bCount = parseInt(b.productCount);
+
+            if ( aCount > bCount ){ return -1; }
+            if ( aCount < bCount ){ return 1; }
+            return 0;
+        });
+    }
+
+    return result;
+}
+
+function sortAndShowCategories(sortCriteria, categoriesArray){
+    currentSortCriteria = sortCriteria; //undefinded = AZ/ZA/CANT
+   
+    if(categoriesArray != undefined){
+        currentCategoriesArray = categoriesArray;
+    }
+
+    currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
+                            //(currentSortCriteria = AZ , currentCategoriesArray)
+    //Muestro las categorías ordenadas
+    showCategoriesList();
+}
+
+
+
+
     
 
 document.addEventListener("DOMContentLoaded", function(){
     getJSONData(Product_URL_modified).then(function(resultObj){
-        if (resultObj.status === "ok")
-        {
+        if (resultObj.status === "ok") 
+        {   
+            arrayCatName = resultObj.data.catName;
+            document.getElementById('selector').innerHTML = arrayCatName;
+           
             categoriesArray = resultObj.data;
-            showCategoriesList(categoriesArray); // carga los datos a la variable
+            currentCategoriesArray = resultObj.data.products;
+            showCategoriesList(); // muestra los datos de la variable
            
         }
     });
+
+    document.getElementById("sortAsc").addEventListener("click", function(){
+        sortAndShowCategories(ORDER_ASC_BY_NAME);
+    });
+
+    document.getElementById("sortDesc").addEventListener("click", function(){
+        sortAndShowCategories(ORDER_DESC_BY_NAME);
+    });
+
+    document.getElementById("sortByCount").addEventListener("click", function(){
+        sortAndShowCategories(ORDER_BY_PROD_COUNT);
+    });
+
 });
 

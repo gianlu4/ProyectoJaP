@@ -5,23 +5,23 @@ let currentCategoriesArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
-
+                         //AZ, currentCategoriesArray
 function sortCategories(criteria, array){
     let result = [];
-    if (criteria === ORDER_ASC_BY_NAME)
+    if (criteria === ORDER_ASC_BY_NAME) //const ORDER_ASC_BY_NAME = "AZ";
     {
         result = array.sort(function(a, b) {
             if ( a.name < b.name ){ return -1; }
             if ( a.name > b.name ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_DESC_BY_NAME){
+    }else if (criteria === ORDER_DESC_BY_NAME){ //const ORDER_DESC_BY_NAME = "ZA";
         result = array.sort(function(a, b) {
             if ( a.name > b.name ){ return -1; }
             if ( a.name < b.name ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_BY_PROD_COUNT){
+    }else if (criteria === ORDER_BY_PROD_COUNT){ //const ORDER_BY_PROD_COUNT = "Cant.";
         result = array.sort(function(a, b) {
             let aCount = parseInt(a.productCount);
             let bCount = parseInt(b.productCount);
@@ -70,16 +70,16 @@ function showCategoriesList(){
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
     }
 }
-
+      
 function sortAndShowCategories(sortCriteria, categoriesArray){
-    currentSortCriteria = sortCriteria;
-
+    currentSortCriteria = sortCriteria; //undefinded = AZ
+   
     if(categoriesArray != undefined){
         currentCategoriesArray = categoriesArray;
     }
 
     currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
-
+                            //(currentSortCriteria = AZ , currentCategoriesArray = categoriesArray)
     //Muestro las categorías ordenadas
     showCategoriesList();
 }
