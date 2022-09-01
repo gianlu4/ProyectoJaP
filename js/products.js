@@ -15,8 +15,8 @@ function showCategoriesList(array){
     for(let i = 0; i < currentCategoriesArray.length; i++){ 
         let products = currentCategoriesArray[i];
 
-        if (((minCount == undefined) || (minCount != undefined && parseInt(products.soldCount) && parseInt(products.cost) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(products.soldCount) && parseInt(products.cost) <= maxCount))){
+        if (((minCount == undefined) || (minCount != undefined && parseInt(products.cost) >= minCount)) &&
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(products.cost) <= maxCount))){
 
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
@@ -83,7 +83,7 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
     currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
                             //(currentSortCriteria = AZ , currentCategoriesArray)
     //Muestro las categorías ordenadas
-    showCategoriesList();
+    showCategoriesList(currentCategoriesArray);
 }
 
 
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function(){
            
             categoriesArray = resultObj.data;
             currentCategoriesArray = resultObj.data.products;
-            showCategoriesList(); // muestra los datos de la variable
+            showCategoriesList(currentCategoriesArray); // muestra los datos de la variable
            
         }
     });
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function(){
         minCount = undefined;
         maxCount = undefined;
 
-        showCategoriesList();
+        showCategoriesList(currentCategoriesArray);
     });
 
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function(){
             maxCount = undefined;
         }
 
-        showCategoriesList();
+        showCategoriesList(currentCategoriesArray);
     });
 
 });

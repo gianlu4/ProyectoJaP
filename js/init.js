@@ -56,6 +56,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
       cancelButtonColor: 'grey',
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Cerrar sesión'
+    
     }).then((result) => {
       if (result.isConfirmed) {   //si hay respuesta positiva, borra el session y redirije al index
       sessionStorage.clear();
@@ -64,13 +65,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
     })}    
 
 
-  function mostrar(){             //mostrar boton de inicio de sesion y ocultar boton de cerrar sesion
-      document.getElementById('cierro').style.display = "none";
-  }
-  function ocultar(){             //ocultar boton de inicio de sesion y mostrar boton de cerrar sesion
-      document.getElementById('inicios').style.display = "none";  
-  }
+
+
+//mostrar boton de inicio de sesion y ocultar boton de cerrar sesion
+function mostrar(){             
+    document.getElementById('cierro').style.display = "none";
+   }
+
+
+   //ocultar boton de inicio de sesion y mostrar boton de cerrar sesion
+function ocultar(){            
+    document.getElementById('inicios').style.display = "none";  
+}
   
+// variable que trae el nombre de usuario para mostrar el nombre en pantalla
   let usuario = sessionStorage.getItem('user');
   
   if(usuario === null){
@@ -80,7 +88,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   }else{
   
       ocultar();
-      document.getElementById('usuario1').innerHTML = "Bienvenido, " + usuario + "!";
+      document.getElementById('usuario1').innerHTML = "Bienvenido, " + usuario + "!!!";
       
   }
   
