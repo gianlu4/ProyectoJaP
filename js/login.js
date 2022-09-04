@@ -9,7 +9,7 @@ function login() {
     
     Swal.fire({
         title: '¡Faltan datos!',
-        text: "Usuario y contraseña son los campos requeridos.",
+        text: "El usuario y la contraseña son los campos requeridos.",
         icon: 'warning',
     })
 
@@ -69,10 +69,12 @@ function signOut() {
       
     function presionarBotonEnter(event) {
       const tecla_enter = event.Key;
-
+      
       if (tecla_enter == "Enter") {
         console.log("voooooy");
+
       }
+     
     }
    });
 */

@@ -1,22 +1,22 @@
-const ORDER_ASC_BY_NAME = "AZ";
-const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COUNT = "Cant.";
-let currentSortCriteria = undefined;
-let minCount = undefined;
-let maxCount = undefined;
+const ascAZ = "AZ"; 
+const descZA = "ZA";  
+const cantArt = "Cant.";
+let variableDeFormaDeFiltro = undefined;
+let valorMin = undefined;  
+let valorMax = undefined;  
 
 let categoriesArray = [];
-let currentCategoriesArray = [];
+let arrayRecorreProductos = []; 
 let arrayCatName = [];
 
-function showCategoriesList(array){
+function mostrarListaDeLasCategorias(arrayRecorreProductos){ 
     let htmlContentToAppend = "";
    
-    for(let i = 0; i < currentCategoriesArray.length; i++){ 
-        let products = currentCategoriesArray[i];
-
-        if (((minCount == undefined) || (minCount != undefined && parseInt(products.cost) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(products.cost) <= maxCount))){
+    for(let i = 0; i < arrayRecorreProductos.length; i++){ 
+        let products = arrayRecorreProductos[i];
+                                                                  //convierte a numero entero
+        if (((valorMin == undefined) || (valorMin != undefined && parseInt(products.cost) >= valorMin)) &&
+            ((valorMax == undefined) || (valorMax != undefined && parseInt(products.cost) <= valorMax))){
 
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
@@ -44,22 +44,22 @@ function showCategoriesList(array){
 }
 
 
-function sortCategories(criteria, array){
+function ordenarCategorias(tipoDeFiltro, array){  
     let result = [];
-    if (criteria === ORDER_ASC_BY_NAME) //= "AZ";
+    if (tipoDeFiltro === ascAZ) //= "AZ";
     {
         result = array.sort(function(a, b) {
             if ( a.name < b.name ){ return -1; }
             if ( a.name > b.name ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_DESC_BY_NAME){ //= "ZA";
+    }else if (tipoDeFiltro === descZA){ //= "ZA";
         result = array.sort(function(a, b) {
             if ( a.name > b.name ){ return -1; }
             if ( a.name < b.name ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_BY_PROD_COUNT){ //= "Cant.";
+    }else if (tipoDeFiltro === cantArt){ //= "Cant.";
         result = array.sort(function(a, b) {
             let aCount = parseInt(a.soldCount); //le cambie el atributo que buscaba en categorias "productCount" y le cambie al .products soldCount, para que pueda filtrar por articulos
             let bCount = parseInt(b.soldCount); //le cambie el atributo que buscaba en categorias "productCount" y le cambie al .products soldCount, para que pueda filtrar por articulos
@@ -73,19 +73,37 @@ function sortCategories(criteria, array){
     return result;
 }
 
-function sortAndShowCategories(sortCriteria, categoriesArray){    
-    currentSortCriteria = sortCriteria; //undefinded = AZ/ZA/CANT
+function ordenarYmostrarCategorias(tipoDeFiltro, categoriesArray){   
+    variableDeFormaDeFiltro = tipoDeFiltro; //undefinded = AZ/ZA/CANT
    
     if(categoriesArray != undefined){
-        currentCategoriesArray = categoriesArray;
+        arrayRecorreProductos = categoriesArray;
     }
 
-    currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
-                            //(currentSortCriteria = AZ , currentCategoriesArray)
+    arrayRecorreProductos = ordenarCategorias(variableDeFormaDeFiltro, arrayRecorreProductos);
+                            //(variableDeFormaDeFiltro = AZ , arrayRecorreProductos)
     //Muestro las categorías ordenadas
-    showCategoriesList(currentCategoriesArray);
+    mostrarListaDeLasCategorias(arrayRecorreProductos);
 }
 
+
+
+
+function barraBuscar (arrayRecorreProductos) {
+
+let buscar = document.getElementById('navBar').value;
+
+let filtrado = arrayRecorreProductos.filter(producto =>{
+
+    return producto.name.toLowerCase().indexOf(buscar.toLowerCase()) > -1 || producto.description.toLowerCase().indexOf(buscar.toLowerCase()) > -1;
+    
+    
+})
+mostrarListaDeLasCategorias(filtrado);
+
+
+
+}
 
 
 
@@ -99,55 +117,63 @@ document.addEventListener("DOMContentLoaded", function(){
             document.getElementById('selector').innerHTML = arrayCatName;
            
             categoriesArray = resultObj.data;
-            currentCategoriesArray = resultObj.data.products;
-            showCategoriesList(currentCategoriesArray); // muestra los datos de la variable
+
+            arrayRecorreProductos = resultObj.data.products;
+
+            mostrarListaDeLasCategorias(arrayRecorreProductos); // muestra los datos de la variable
            
         }
     });
 
     document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_ASC_BY_NAME);
+        ordenarYmostrarCategorias(ascAZ);
     });
 
     document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_DESC_BY_NAME);
+        ordenarYmostrarCategorias(descZA);
     });
 
     document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_BY_PROD_COUNT);
+        ordenarYmostrarCategorias(cantArt);
     });
 
+    document.getElementById("navBar").addEventListener("keyup", function(){
+        
+        barraBuscar (arrayRecorreProductos);
+    });
+
+
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
+        
         document.getElementById("rangeFilterCountMin").value = "";
         document.getElementById("rangeFilterCountMax").value = "";
 
-        minCount = undefined;
-        maxCount = undefined;
+        valorMin = undefined;
+        valorMax = undefined;
 
-        showCategoriesList(currentCategoriesArray);
+        mostrarListaDeLasCategorias(arrayRecorreProductos);
     });
 
     document.getElementById("rangeFilterCount").addEventListener("click", function(){
         //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
         //de productos por categoría.
-        minCount = document.getElementById("rangeFilterCountMin").value;
-        maxCount = document.getElementById("rangeFilterCountMax").value;
+        valorMin = document.getElementById("rangeFilterCountMin").value;
+        valorMax = document.getElementById("rangeFilterCountMax").value;
 
-        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0){
-            minCount = parseInt(minCount);
+        if ((valorMin != undefined) && (valorMin != "") && (parseInt(valorMin)) >= 0){
+            valorMin = parseInt(valorMin);
         }
         else{
-            minCount = undefined;
+            valorMin = undefined;
         }
-
-        if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0){
-            maxCount = parseInt(maxCount);
+        if ((valorMax != undefined) && (valorMax != "") && (parseInt(valorMax)) >= 0){
+            valorMax = parseInt(valorMax);
         }
         else{
-            maxCount = undefined;
+            valorMax = undefined;
         }
 
-        showCategoriesList(currentCategoriesArray);
+        mostrarListaDeLasCategorias(arrayRecorreProductos);
     });
 
 });

@@ -193,7 +193,7 @@ a.custom-card:hover {
 body {
   margin: 0;
   padding: 0;
-  background-color: #17a2b8;
+  background-color:  #EAEAEA;
   height: 100vh;
 }
 #login .container #login-row #login-column #login-box {
@@ -238,5 +238,17 @@ body {
   margin-left: -8%;
 }
 #navBar{
-  width: 120%;
+  width: 480%;
+  margin-left: -415%;
+}
+#rangeFilterCountMin{
+  width: 150%;
+  margin-left: -105%;
+}
+#rangeFilterCountMax{
+  width: 150%;
+  margin-left: -62%;
+}
+#celdaPrecio{
+  margin-left: -150%;
 }
