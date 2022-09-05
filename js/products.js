@@ -74,8 +74,8 @@ function ordenarCategorias(tipoDeFiltro, array){
 }
 
 function ordenarYmostrarCategorias(tipoDeFiltro, categoriesArray){   
-    variableDeFormaDeFiltro = tipoDeFiltro; //undefinded = AZ/ZA/CANT
-   
+    variableDeFormaDeFiltro = tipoDeFiltro; 
+            //undefinded = AZ/ZA/CANT
     if(categoriesArray != undefined){
         arrayRecorreProductos = categoriesArray;
     }
@@ -93,13 +93,13 @@ function barraBuscar (arrayRecorreProductos) {
 
 let buscar = document.getElementById('navBar').value;
 
-let filtrado = arrayRecorreProductos.filter(producto =>{
+let filtro = arrayRecorreProductos.filter(producto =>{
 
     return producto.name.toLowerCase().indexOf(buscar.toLowerCase()) > -1 || producto.description.toLowerCase().indexOf(buscar.toLowerCase()) > -1;
     
     
 })
-mostrarListaDeLasCategorias(filtrado);
+mostrarListaDeLasCategorias(filtro);
 
 
 
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function(){
         barraBuscar (arrayRecorreProductos);
     });
 
-
+  //boton limpiar
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
         
         document.getElementById("rangeFilterCountMin").value = "";
