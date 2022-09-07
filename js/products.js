@@ -9,6 +9,17 @@ let categoriesArray = [];
 let arrayRecorreProductos = []; 
 let arrayCatName = [];
 
+
+function setCatIDInfoProd(id) {
+    localStorage.setItem("catIDinfoProd", id);
+    window.location = "product-info.html"
+}
+function setCatIDComments(id) {
+    localStorage.setItem("catIDprodComments", id);
+    window.location = "product-info.html"
+}
+
+
 function mostrarListaDeLasCategorias(arrayRecorreProductos){ 
     let htmlContentToAppend = "";
    
@@ -19,8 +30,9 @@ function mostrarListaDeLasCategorias(arrayRecorreProductos){
             ((valorMax == undefined) || (valorMax != undefined && parseInt(products.cost) <= valorMax))){
 
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
-            <div class="row">
+        
+        <div onclick="setCatIDInfoProd(`+ products.id +`) "class="list-group-item list-group-item-action cursor-active">
+            <div class="row"> 
                 <div class="col-3">
                     <img src="` + products.image + `" alt="product image" class="img-thumbnail">
                 </div>
@@ -100,14 +112,8 @@ let filtro = arrayRecorreProductos.filter(producto =>{
     
 })
 mostrarListaDeLasCategorias(filtro);
-
-
-
 }
 
-
-
-    
 
 document.addEventListener("DOMContentLoaded", function(){
     getJSONData(Product_URL_modified).then(function(resultObj){

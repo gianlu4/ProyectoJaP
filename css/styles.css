@@ -70,7 +70,7 @@ nav a {
 footer {
   padding-top: -100%;
   padding-bottom: 0%;
-  background-color: #adadad;
+  background-color:#EAEAEA;
 }
 
 footer p {
@@ -105,6 +105,7 @@ footer p {
 }
 
 .lds-ring {
+ 
   display: inline-block;
   position: relative;
   width: 64px;
@@ -170,6 +171,8 @@ footer p {
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
+  color: #0087F7;
+  background-color: #53C0FB;
   top: 0;
   left: 0;
   z-index: 1021;
@@ -251,4 +254,50 @@ body {
 }
 #celdaPrecio{
   margin-left: -150%;
+}
+
+
+
+/*el centro de la caja de imagen*/
+.product-imitation {
+text-align: center;
+
+background-color: #EAEAEA;
+
+}
+
+.ibox-content {
+background-color: #ffffff;
+color: inherit;
+padding: 20px 20px 20px 20px;
+border-color: #e7eaec;
+border-image: none;
+border-style: solid solid none;
+border-width: 1px 0;
+}
+
+.img-infoprod{
+  width: 100%;
+  object-fit: cover;
+  height: 30vh;
+  display: flex;
+  
+}
+
+.text-muted{
+  margin-top: 5%;
+ 
+}
+.col-md-2{
+  margin-right: 13.3%;
+  margin-top: 2%;
+  margin-left: 20%;
+}
+
+#ibox1{
+  padding-left: 400%;
+  
+}
+#ibox2{
+  margin-left: 40%;
 }
