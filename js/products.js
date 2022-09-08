@@ -14,11 +14,6 @@ function setCatIDInfoProd(id) {
     localStorage.setItem("catIDinfoProd", id);
     window.location = "product-info.html"
 }
-function setCatIDComments(id) {
-    localStorage.setItem("catIDprodComments", id);
-    window.location = "product-info.html"
-}
-
 
 function mostrarListaDeLasCategorias(arrayRecorreProductos){ 
     let htmlContentToAppend = "";

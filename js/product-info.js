@@ -6,29 +6,32 @@ let ProductosComments = [];
 function MostrarInfoDeProductos(){
 
 let estructuraHTML = "";
-   
+let estructuraProdRel = "";  
 let infoProd = ProductosInfoData;
 
-//let prodComm = ProductosComments;
     
      estructuraHTML += `  <div  id="plantillaInfoProductos" class="container">
   <div class="text-center">
-    <h4> ` + infoProd.category + `</h4>
+  <br>
+    <p>Verás aquí toda la informacion del producto de la categoría <b>` + infoProd.category + `</b></p>
   </div>
+  
   <div class="text-center">
-    <h1> ` + infoProd.name + ` </h1>
+  <div class ="box1">
+    <h2 id = "prueba"> ` + infoProd.name + `</h2>
+  </div> <br>
       <div class="text-center">
-        <h4>` + infoProd.description + `</h4>
+        <h4 id = "prueba">` + infoProd.description + `</h4>
       </div>  
   </div>
   <div class="col-auto p-5">
-    <p><b>Precio</b>` + infoProd.currency + " " + infoProd.cost + `</p>
+    <h4><b>Precio:` + " " + ` <font color ="green"> ` + infoProd.currency + `</font>` + " " + infoProd.cost + `.</b></h4>
     <br>
-    <p><b>Cantidad de vendidos</b>` + infoProd.soldCount + `</p>
+    <p><b>Cantidad de vendidos: <font color="red">`+ " " + infoProd.soldCount + `</font>.</b></p>
     <br>
-    <p><b>Imagenes</b></p>
+    
 </div>
-
+<p><b>Imagenes ilustrativas </b></p>
 <div class="row">
     <div class="col-md-3">
         <div class="ibox">
@@ -76,16 +79,24 @@ let infoProd = ProductosInfoData;
 </div>
 </div>
 </div>
+<br>
+<br>
+`   
+document.getElementById("Prod-info-list").innerHTML = estructuraHTML;
+
+estructuraProdRel += `
+<br>
+<hr>
 <div id="container2"> 
 <div class="text-center">
-    <h3> Productos relacionados</h3>
+    <h3 id="prueba"> Productos relacionados</h3>
   </div>
 <div class="row">
     <div class="col-md-2">
         <div class="ibox1">
-          <div class="text-center">
-         <p><b>`+ infoProd.relatedProducts[0].name +`</b></p>
-         </div>
+          <div class="text-end">
+         <p id = "merparrafo"><b>`+ infoProd.relatedProducts[0].name +`</b></p>
+         
             <div class="ibox-content product-box1">
                 <div>
                   <img src="` + infoProd.relatedProducts[0].image + `" alt="product image" class="img-infoprod">
@@ -93,12 +104,13 @@ let infoProd = ProductosInfoData;
                 <div>
               </div>
             </div>
+          </div>
         </div>
     </div>
     <div class="col-md-2">
         <div class="ibox2">
-        <div class="text-center">
-        <p><b>`+ infoProd.relatedProducts[1].name +`</b></p>
+        <div class="text-start">
+        <p id = "doparrafo"><b>`+ infoProd.relatedProducts[1].name +`</b></p>
         </div>
             <div class="ibox-content product-box2">
                 <div>
@@ -113,10 +125,22 @@ let infoProd = ProductosInfoData;
 </div>
 `
         
-        document.getElementById("Prod-info-list").innerHTML = estructuraHTML;
+        document.getElementById("Prod-relacionado").innerHTML = estructuraProdRel;
 }
 
+function mostrarComentarios() {
 
+let estructuraHTMLcomentarios = "";
+
+for(let i = 0; i < ProductosComments.length; i++){
+    let prodComm = ProductosComments[i];
+
+    estructuraHTMLcomentarios+=`<li class="list-group-item"><b>` + prodComm.user + `</b> - ` 
+    + prodComm.dateTime + " " + "- " +prodComm.score + `<br>`+ prodComm.description +`</li>`
+   }
+   document.getElementById('Prod-comments-list').innerHTML = estructuraHTMLcomentarios;
+
+}
 
 
 
@@ -137,8 +161,8 @@ document.addEventListener("DOMContentLoaded", function(){
       if (resultObj.status === "ok") 
       {   
         ProductosComments = resultObj.data;
-          
-          MostrarInfoDeProductos();
+          console.log(ProductosComments)
+          mostrarComentarios();
          
       }
   });

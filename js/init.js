@@ -9,7 +9,7 @@ const LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/101.jso
 const EXT_TYPE = ".json";
 let Product_URL_modified = PRODUCTS_URL + localStorage.getItem("catID") + EXT_TYPE; //identificador
 let ProductINFO_URL_modified = PRODUCT_INFO_URL + localStorage.getItem("catIDinfoProd") + EXT_TYPE;
-let ProductCommentsInfo = PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("catIDprodComments") + EXT_TYPE;
+let ProductCommentsInfo = PRODUCT_INFO_COMMENTS_URL + localStorage.getItem("catIDinfoProd") + EXT_TYPE;
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";

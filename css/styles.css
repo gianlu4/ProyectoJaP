@@ -257,7 +257,7 @@ body {
 }
 
 
-
+/*pantalla de info products*/
 /*el centro de la caja de imagen*/
 .product-imitation {
 text-align: center;
@@ -269,7 +269,7 @@ background-color: #EAEAEA;
 .ibox-content {
 background-color: #ffffff;
 color: inherit;
-padding: 20px 20px 20px 20px;
+padding: 10px 10px 10px 10px;
 border-color: #e7eaec;
 border-image: none;
 border-style: solid solid none;
@@ -294,10 +294,37 @@ border-width: 1px 0;
   margin-left: 20%;
 }
 
-#ibox1{
-  padding-left: 400%;
+
+.ibox-content.product-box1{
+  margin-left: 86%;
+  margin-right: -88%;
+
+}
+.ibox-content.product-box2{
+  margin-left: -128%;
+  margin-right: 127%;
+}
+
+#merparrafo{
+  margin-right: -56%;
+}
+#doparrafo{
+  margin-left:-95%;
+
+}
+
+#prueba{
+  padding: 5px 5px 5px 5px;
+  margin-inline: auto;
+  text-align:center;
+  width:fit-content;
+  background-color: white;
+  border-radius: 8px;
   
 }
-#ibox2{
-  margin-left: 40%;
+#Prod-comments-list {
+  max-width: 50%;
+  margin-left: 50%;
 }
+
+/*finalizacion de info produc*/
