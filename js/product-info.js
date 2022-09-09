@@ -24,8 +24,8 @@ let infoProd = ProductosInfoData;
         <h4 id = "prueba">` + infoProd.description + `</h4>
       </div>  
   </div>
-  <div class="col-auto p-5">
-    <h4><b>Precio:` + " " + ` <font color ="green"> ` + infoProd.currency + `</font>` + " " + infoProd.cost + `.</b></h4>
+  <div class="">
+    <p><b>Precio:` + " " + infoProd.currency + " " + ` <font color ="green"> ` + infoProd.cost + `</font>.</b></p>
     <br>
     <p><b>Cantidad de vendidos: <font color="red">`+ " " + infoProd.soldCount + `</font>.</b></p>
     <br>
@@ -128,20 +128,158 @@ estructuraProdRel += `
         document.getElementById("Prod-relacionado").innerHTML = estructuraProdRel;
 }
 
+
+
+
+
+
 function mostrarComentarios() {
 
 let estructuraHTMLcomentarios = "";
 
 for(let i = 0; i < ProductosComments.length; i++){
-    let prodComm = ProductosComments[i];
+    
 
-    estructuraHTMLcomentarios+=`<li class="list-group-item"><b>` + prodComm.user + `</b> - ` 
-    + prodComm.dateTime + " " + "- " +prodComm.score + `<br>`+ prodComm.description +`</li>`
+    estructuraHTMLcomentarios+=`
+       <li class="list-group-item"><b>
+          <span> ${ProductosComments[i].user}</span></b>
+          <span> - ${ProductosComments[i].dateTime} -</span>
+            <span>
+              <span class= "fa fa-star ${ProductosComments[i].score >= 1 ? "checked" : ""}"></span>
+              <span class= "fa fa-star ${ProductosComments[i].score >= 2 ? "checked" : ""}"></span>
+              <span class= "fa fa-star ${ProductosComments[i].score >= 3 ? "checked" : ""}"></span>
+              <span class= "fa fa-star ${ProductosComments[i].score >= 4 ? "checked" : ""}"></span>
+              <span class= "fa fa-star ${ProductosComments[i].score >= 5 ? "checked" : ""}"></span>
+            </span>
+          <br>
+          <span> ${ProductosComments[i].description}</span>
+
+       </li>`
    }
    document.getElementById('Prod-comments-list').innerHTML = estructuraHTMLcomentarios;
 
 }
 
+
+//desafiate
+let Puntaje = document.getElementById('Puntaje').value;
+
+function estrellita(Puntaje){
+  let estrella = "";
+  
+  for(let i = 1; i <= 5; i ++){
+    
+    if(i <= puntos){
+      
+      estrella += `<i class="fas fa-star checked"></i>`;
+      
+    }else{
+
+      estrella += `<i class="far fa-star nada"></i>`;
+
+  }}
+}
+
+
+function fechatiempo(){
+
+let fechaHora = new Date();
+let anio = fechaHora.getFullYear();
+let mes = fechaHora.getMonth();
+let dia = fechaHora.getDay();
+let minutos = fechaHora.getMinutes();
+let segundos = fechaHora.getSeconds();
+let horas = fechaHora.getHours();
+
+if (dia < 10) { dia = "0" + dia;}
+if (minutos < 10) { minutos = "0" + minutos;}
+if (segundos < 10) { segundos = "0" + segundos;}
+if (mes < 10) { mes = "0" + mes;}
+if (horas < 10) { horas = "0" + horas;}
+
+let tiempoActual = anio + "-" + mes + "-" + dia + " " + horas + ":" + minutos + ":" + segundos;
+
+}
+
+let array = [];
+
+
+function mostrar(array){
+  let elementos="";
+  for (let item of array) {
+      elementos+= `<li class="list-group-item"> ` + array.item + fechatiempo() +   `</li> `
+      
+  }
+  document.getElementById('Prod-comments-list').innerHTML = elementos;
+  
+}
+
+
+function agregarComentario () {
+    
+let elemento = document.getElementById('comentario').value;
+let Puntaje = document.getElementById('Puntaje').value;
+
+  
+  if(elemento != "" && Puntaje != "") {
+
+  array.push(elemento);
+  localStorage.setItem('IdCommen', JSON.stringify(array))
+  mostrar(array);
+
+  } else {
+      Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Debes ingresar un ítem',
+        })
+   }
+
+  document.getElementById('comentario').value="";
+}
+
+
+
+  
+document.addEventListener('DOMContentLoaded', ()=> {
+
+  array=JSON.parse(localStorage.getItem('IdCommen'));
+  if (array!=null){
+    mostrar(array);
+  } else {
+      array=[];
+  }
+  let usuario = document.getElementById('usuario1').innerText;
+   
+  console.log(usuario);
+
+
+  document.getElementById('botonsito').addEventListener('click',()=>{
+  
+   
+
+    if(usuario == ""){
+      Swal.fire({
+        title: 'Debes iniciar sesión para comentar',
+        text: "Deseas iniciar?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#17a2b8',
+        cancelButtonColor: 'grey',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Iniciar sesión'
+      
+      }).then((result) => {
+        if (result.isConfirmed) {   
+        location.href= "login.html";
+        }
+      })}   
+    else{
+      agregarComentario();
+    }
+   })
+})
+//hasta aca el desafiate
 
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -161,7 +299,7 @@ document.addEventListener("DOMContentLoaded", function(){
       if (resultObj.status === "ok") 
       {   
         ProductosComments = resultObj.data;
-          console.log(ProductosComments)
+          
           mostrarComentarios();
          
       }

@@ -323,8 +323,24 @@ border-width: 1px 0;
   
 }
 #Prod-comments-list {
-  max-width: 50%;
+  max-width: 49.2%;
   margin-left: 50%;
 }
 
+.col-sm-4{
+  margin-top: 4%;
+  margin-left: 58%;
+  text-align:center;
+}
+#comentario{
+  height: 90px;
+  text-align:inherit;
+}
+#puntuacion{
+  margin-top: 6%;
+}
+#botonsito{
+  margin-left: 83%;
+  margin-top: -16%;
+}
 /*finalizacion de info produc*/
