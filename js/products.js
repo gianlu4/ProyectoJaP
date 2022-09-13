@@ -9,7 +9,7 @@ let categoriesArray = [];
 let arrayRecorreProductos = []; 
 let arrayCatName = [];
 
-
+//seteo el Id de la info de los productos para redireccionar de pagina
 function setCatIDInfoProd(id) {
     localStorage.setItem("catIDinfoProd", id);
     window.location = "product-info.html"

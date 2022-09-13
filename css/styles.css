@@ -229,7 +229,7 @@ body {
 
 /* botones de cerrar y iniciar sesion*/
 #inicios {
-  background-color:cyan;
+  background-color:white;
   color: black;
 }
 #cierro {
@@ -326,6 +326,11 @@ border-width: 1px 0;
   max-width: 49.2%;
   margin-left: 50%;
 }
+#Prod-comments-user{
+  max-width: 49.2%;
+  margin-left: 50%;
+
+}
 
 .col-sm-4{
   margin-top: 4%;
@@ -343,4 +348,13 @@ border-width: 1px 0;
   margin-left: 83%;
   margin-top: -16%;
 }
+
+
+#hr{
+  margin-left: 16%;
+  margin-right: 16%;
+}
+
+
+
 /*finalizacion de info produc*/

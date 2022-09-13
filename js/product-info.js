@@ -3,6 +3,12 @@ let ProductosInfoData = [];
 let ProductosComments = [];
 
 
+//funcion que traje  desde products.js para darle funcionalidad a las imagenes relacionadas
+function setCatIDInfoProd(id) {
+  localStorage.setItem("catIDinfoProd", id);
+  window.location = "product-info.html"
+}
+
 function MostrarInfoDeProductos(){
 
 let estructuraHTML = "";
@@ -86,7 +92,7 @@ document.getElementById("Prod-info-list").innerHTML = estructuraHTML;
 
 estructuraProdRel += `
 <br>
-<hr>
+<hr id="hr">
 <div id="container2"> 
 <div class="text-center">
     <h3 id="prueba"> Productos relacionados</h3>
@@ -98,7 +104,7 @@ estructuraProdRel += `
          <p id = "merparrafo"><b>`+ infoProd.relatedProducts[0].name +`</b></p>
          
             <div class="ibox-content product-box1">
-                <div>
+                <div onclick="setCatIDInfoProd(` + infoProd.relatedProducts[0].id + `) "class="list-group-item-action cursor-active">
                   <img src="` + infoProd.relatedProducts[0].image + `" alt="product image" class="img-infoprod">
                 </div>
                 <div>
@@ -113,7 +119,7 @@ estructuraProdRel += `
         <p id = "doparrafo"><b>`+ infoProd.relatedProducts[1].name +`</b></p>
         </div>
             <div class="ibox-content product-box2">
-                <div>
+                <div onclick="setCatIDInfoProd(` + infoProd.relatedProducts[1].id + `)"class="list-group-item-action cursor-active">
                   <img src="` + infoProd.relatedProducts[1].image + `" alt="product image" class="img-infoprod">
                 </div>
                 <div>
@@ -130,9 +136,6 @@ estructuraProdRel += `
 
 
 
-
-
-
 function mostrarComentarios() {
 
 let estructuraHTMLcomentarios = "";
@@ -141,6 +144,8 @@ for(let i = 0; i < ProductosComments.length; i++){
     
 
     estructuraHTMLcomentarios+=`
+
+    
        <li class="list-group-item"><b>
           <span> ${ProductosComments[i].user}</span></b>
           <span> - ${ProductosComments[i].dateTime} -</span>
@@ -161,104 +166,71 @@ for(let i = 0; i < ProductosComments.length; i++){
 }
 
 
-//desafiate
-let Puntaje = document.getElementById('Puntaje').value;
 
-function estrellita(Puntaje){
-  let estrella = "";
+
+//desafiate
+
+let usuarioComm = sessionStorage.getItem('user'); //me trae el nombre de usuario
+let array = [];
+let arrayPuntaje = [];
+
+
+function mostrar(){
+
+//variables y condiciones para mostrar fecha y hora
+  let fechaHora = new Date();
+  let anio = fechaHora.getFullYear();
+  let mes = fechaHora.getMonth() + 1;
+   if (mes < 10) { mes = "0" + mes;}
+  let dia = fechaHora.getDay();
+   if (dia < 10) { dia = "0" + dia;}
+  let minutos = fechaHora.getMinutes();
+   if (minutos < 10) { minutos = "0" + minutos;}
+  let segundos = fechaHora.getSeconds();
+   if (segundos < 10) { segundos = "0" + segundos;}
+  let horas = fechaHora.getHours();
+   if (horas < 10) { horas = "0" + horas;}
   
+  // variable que muestra todo en un conjunto
+  let tiempoActual = anio + "-" + mes + "-" + dia + " " + horas + ":" + minutos + ":" + segundos;
+
+
+  let estrella = "";//Variable para mostrar estrellas
+
   for(let i = 1; i <= 5; i ++){
     
-    if(i <= puntos){
+    if(i <= document.getElementById('Puntaje').value){
       
       estrella += `<i class="fas fa-star checked"></i>`;
       
     }else{
 
-      estrella += `<i class="far fa-star nada"></i>`;
+      estrella += `<i class="fa fa-star"></i>`;
 
   }}
-}
 
+  let elementos="";//Variable para mostrar el comentario agregado en su totalidad
 
-function fechatiempo(){
+  {
 
-let fechaHora = new Date();
-let anio = fechaHora.getFullYear();
-let mes = fechaHora.getMonth();
-let dia = fechaHora.getDay();
-let minutos = fechaHora.getMinutes();
-let segundos = fechaHora.getSeconds();
-let horas = fechaHora.getHours();
+      elementos+= 
 
-if (dia < 10) { dia = "0" + dia;}
-if (minutos < 10) { minutos = "0" + minutos;}
-if (segundos < 10) { segundos = "0" + segundos;}
-if (mes < 10) { mes = "0" + mes;}
-if (horas < 10) { horas = "0" + horas;}
-
-let tiempoActual = anio + "-" + mes + "-" + dia + " " + horas + ":" + minutos + ":" + segundos;
-
-}
-
-let array = [];
-
-
-function mostrar(array){
-  let elementos="";
-  for (let item of array) {
-      elementos+= `<li class="list-group-item"> ` + array.item + fechatiempo() +   `</li> `
+          `<li class="list-group-item"><b>
+              ${usuarioComm}</b> - ${tiempoActual} - 
+                 ${estrella} <br> ${document.getElementById('comentario').value}</li> `
+      
       
   }
-  document.getElementById('Prod-comments-list').innerHTML = elementos;
-  
-}
-
-
-function agregarComentario () {
-    
-let elemento = document.getElementById('comentario').value;
-let Puntaje = document.getElementById('Puntaje').value;
-
-  
-  if(elemento != "" && Puntaje != "") {
-
-  array.push(elemento);
-  localStorage.setItem('IdCommen', JSON.stringify(array))
-  mostrar(array);
-
-  } else {
-      Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Debes ingresar un ítem',
-        })
-   }
-
+  document.getElementById('Prod-comments-user').innerHTML += elementos;
   document.getElementById('comentario').value="";
+  document.getElementById('Puntaje').value="";
 }
 
 
+/*
+function preguntarSiHayUsuario () {
 
-  
-document.addEventListener('DOMContentLoaded', ()=> {
-
-  array=JSON.parse(localStorage.getItem('IdCommen'));
-  if (array!=null){
-    mostrar(array);
-  } else {
-      array=[];
-  }
-  let usuario = document.getElementById('usuario1').innerText;
-   
-  console.log(usuario);
-
-
-  document.getElementById('botonsito').addEventListener('click',()=>{
-  
-   
-
-    if(usuario == ""){
+  if(usuarioComm == null){
       Swal.fire({
         title: 'Debes iniciar sesión para comentar',
         text: "Deseas iniciar?",
@@ -272,14 +244,15 @@ document.addEventListener('DOMContentLoaded', ()=> {
       }).then((result) => {
         if (result.isConfirmed) {   
         location.href= "login.html";
+        }else if (result.isCancel){
+          document.getElementById('comentario').value="";   
+          document.getElementById('Puntaje').value=""; 
         }
-      })}   
-    else{
-      agregarComentario();
-    }
-   })
-})
-//hasta aca el desafiate
+   })}
+
+}
+*/
+
 
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -304,4 +277,22 @@ document.addEventListener("DOMContentLoaded", function(){
          
       }
   });
+
+  document.getElementById("botonsito").addEventListener("click", function(){
+
+    if(document.getElementById('comentario').value != "" && document.getElementById('Puntaje').value != ""){
+    mostrar();
+  
+  }else{
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Debes ingresar todos los campos',
+    })
+    document.getElementById('comentario').value="";
+    document.getElementById('Puntaje').value="";
+
+}
+   })
+   
 });

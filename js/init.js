@@ -88,7 +88,7 @@ function ocultar(){
   }else{
   
       ocultar();
-      document.getElementById('usuario1').innerHTML = "Bienvenido, " + usuario + "!!!";
+      document.getElementById('usuario1').innerHTML =  usuario ;
       
   }
   
