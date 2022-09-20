@@ -37,53 +37,37 @@ let infoProd = ProductosInfoData;
     <br>
     
 </div>
-<p><b>Imagenes ilustrativas </b></p>
-<div class="row">
-    <div class="col-md-3">
-        <div class="ibox">
-            <div class="ibox-content product-box">
-                <div class="product-imitation">
-                  <img src="` + infoProd.images[0] + `" alt="product image" class="img-infoprod">
-                </div>
-                <div>
-              </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-      <div class="ibox">
-          <div class="ibox-content product-box">
-              <div class="product-imitation">
-                <img src="` + infoProd.images[1] + `" alt="product image" class="img-infoprod">
-              </div>
-              <div>
-            </div>
-          </div>
-      </div>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+<p class= "text-center"><b>Imagenes ilustrativas </b></p>
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 3"></button>
   </div>
-  <div class="col-md-3">
-    <div class="ibox">
-        <div class="ibox-content product-box">
-            <div class="product-imitation">
-              <img src="` + infoProd.images[2] + `" alt="product image" class="img-infoprod">
-            </div>
-            <div>
-          </div>
-        </div>
+  <div class="carousel-inner" >
+    <div class="carousel-item active">
+      <img src="` + infoProd.images[0] + `" class="d-block w-100" alt="product image">
     </div>
-</div>
-<div class="col-md-3">
-  <div class="ibox">
-      <div class="ibox-content product-box">
-          <div class="product-imitation">
-            <img src="` + infoProd.images[3] + `" alt="product image" class="img-infoprod">
-          </div>
-          <div>
-        </div>
-      </div>
+    <div class="carousel-item">
+      <img src="` + infoProd.images[1] + `" class="d-block w-100" alt="product image">
+    </div>
+    <div class="carousel-item">
+      <img src="` + infoProd.images[2] + `" class="d-block w-100" alt="product image">
+    </div>
+    <div class="carousel-item">
+      <img src="` + infoProd.images[3] + `" class="d-block w-100" alt="product image">
+    </div>
   </div>
-</div>
-</div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 <br>
 <br>

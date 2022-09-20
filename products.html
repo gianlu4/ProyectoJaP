@@ -22,9 +22,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
-            <p class="nav-link active"><span id= "usuario1"></span></p>
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Inicio</a> 
+            <a class="nav-link active" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -33,8 +31,18 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li>
-            <button class="btn btn-dark" id= "inicios">Iniciar sesión</button>
-            <button class="btn btn-dark" id= "cierro">Cerrar sesión</button>
+            <div class="dropdown">
+              <button class="btn btn-dark" id= "inicios">Iniciar sesión</button>
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="LogOut"  data-bs-toggle="dropdown" aria-expanded="false">
+                  <span id= "usuario1"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item cursor-active" id="cierro">Cerrar sesión</a></li>
+              </ul>
+            </div>
           </li>
         </ul>
       </div>

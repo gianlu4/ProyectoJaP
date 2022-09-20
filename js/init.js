@@ -43,6 +43,10 @@ let getJSONData = function(url){
         return result;
     });
 } 
+ 
+
+
+
 
 document.addEventListener("DOMContentLoaded", ()=>{
 
@@ -60,24 +64,24 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }).then((result) => {
       if (result.isConfirmed) {   //si hay respuesta positiva, borra el session y redirije al index
       sessionStorage.clear();
-      location.href= "index.html";
+      location.href= "login.html";
       }
     })}    
 
-
-
-
+    
 //mostrar boton de inicio de sesion y ocultar boton de cerrar sesion
 function mostrar(){             
-    document.getElementById('cierro').style.display = "none";
-   }
+  document.getElementById('LogOut').style.display = "none";
+ }
 
 
-   //ocultar boton de inicio de sesion y mostrar boton de cerrar sesion
+ //ocultar boton de inicio de sesion y mostrar boton de cerrar sesion
 function ocultar(){            
-    document.getElementById('inicios').style.display = "none";  
+  document.getElementById('inicios').style.display = "none";  
 }
-  
+
+
+
 // variable que trae el nombre de usuario para mostrar el nombre en pantalla
   let usuario = sessionStorage.getItem('user');
   
@@ -102,4 +106,3 @@ function ocultar(){
     location.href="login.html";     
   })
   })
-
