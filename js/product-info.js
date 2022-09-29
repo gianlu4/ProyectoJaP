@@ -3,7 +3,7 @@ let ProductosInfoData = [];
 let ProductosComments = [];
 
 
-//funcion que traje  desde products.js para darle funcionalidad a las imagenes relacionadas
+//misma funcion que traje  desde products.js para darle funcionalidad a las imagenes relacionadas
 function setCatIDInfoProd(id) {
   localStorage.setItem("catIDinfoProd", id);
   window.location = "product-info.html"
@@ -69,8 +69,11 @@ let infoProd = ProductosInfoData;
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
 <br>
+<p class="text-center" id="prueba"><b>Algunos comentarios...</b></p>
 <br>
+
 `   
 document.getElementById("Prod-info-list").innerHTML = estructuraHTML;
 
